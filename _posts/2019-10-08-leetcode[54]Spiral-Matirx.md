@@ -55,7 +55,7 @@ Given a matrix of m x n elements (m rows, n columns), return all elements of the
 
 如图，首先将最外层的左上角的坐标标记为(r1, c1),右下角坐标标记为(r2, c2),将每一层的四个边(最里层可能不是四个边)依次如图输出，这一层输出完毕之后进入下次层。这里需要注意不要将每一层角上的数字重复输出。代码如下：
 
-{% highlight cpp %}
+{% highlight cpp linenos %}
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
