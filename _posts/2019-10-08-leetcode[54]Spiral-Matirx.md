@@ -6,9 +6,13 @@ categories: leetcode
 ---
 leetcode第54题原题说明：
 # Description
+
 Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
+
 ## Example 1:
-{% highlight %}
+
+'''
+
 Input:
 [
  [ 1, 2, 3 ],
@@ -16,9 +20,13 @@ Input:
  [ 7, 8, 9 ]
 ]
 Output: \[1,2,3,6,9,8,7,4,5]
-{% endhighlight %}
+
+'''
+
 ## Example 2:
-{% hightlight %}
+
+'''
+
 Input:
 [
   [1, 2, 3, 4],
@@ -26,10 +34,15 @@ Input:
   [9,10,11,12]
 ]
 Output: \[1,2,3,4,8,12,11,10,9,5,6,7]
-{% endhighlight %}
+
+'''
+
     意思就是说给定一个m x n的整数矩阵，从左上角开始顺时针螺旋存入到一个一维数组中并输出。这道题的大致思路就是将给定的矩阵从外向里划分层次，第一层为最外层，第二层为次外层，依此类推直到最里层。
+
 ![img](~/axianBlog/_includes/54_spiralmatrix.png)
+
     如图，首先将最外层的左上角的坐标标记为(r1, c1),右下角坐标标记为(r2, c2),将每一层的四个边(最里层可能不是四个边)依次如图输出，这一层输出完毕之后进入下次层，代码如下：
+
 {% highlight cpp %}
 class Solution {
 public:
