@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>刷题记录Leetcode54.Spiral Matrix</title>
-  <meta name="description" content="leetcode第54题原题说明：# Description">
+  <meta name="description" content="leetcode第54题原题说明：">
 
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://yourdomain.com/leetcode/2019/10/08/leetcode-54-Spiral-Matirx.html">
@@ -62,48 +62,59 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <p>leetcode第54题原题说明：
-# Description</p>
+    <p>leetcode第54题原题说明：</p>
+
+<h4 id="description">Description</h4>
 
 <p>Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.</p>
 
-<h2 id="example-1">Example 1:</h2>
+<hr />
 
-<p>’’’</p>
+<h4 id="example-1">Example 1:</h4>
 
-<p>Input:
+<div class="highlighter-rouge"><pre class="highlight"><code>Input:
+
 [
+
  [ 1, 2, 3 ],
+
  [ 4, 5, 6 ],
+
  [ 7, 8, 9 ]
+
 ]
-Output: [1,2,3,6,9,8,7,4,5]</p>
 
-<p>’’’</p>
+Output: [1,2,3,6,9,8,7,4,5]
+</code></pre>
+</div>
 
-<h2 id="example-2">Example 2:</h2>
+<hr />
 
-<p>’’’</p>
+<h4 id="example-2">Example 2:</h4>
 
-<p>Input:
+<div class="highlighter-rouge"><pre class="highlight"><code>Input:
+
 [
+
   [1, 2, 3, 4],
+
   [5, 6, 7, 8],
+
   [9,10,11,12]
+
 ]
-Output: [1,2,3,4,8,12,11,10,9,5,6,7]</p>
 
-<p>’’’</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>意思就是说给定一个m x n的整数矩阵，从左上角开始顺时针螺旋存入到一个一维数组中并输出。这道题的大致思路就是将给定的矩阵从外向里划分层次，第一层为最外层，第二层为次外层，依此类推直到最里层。
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
 </code></pre>
 </div>
 
-<p><img src="~/axianBlog/_includes/54_spiralmatrix.png" alt="img" /></p>
+<hr />
 
-<div class="highlighter-rouge"><pre class="highlight"><code>如图，首先将最外层的左上角的坐标标记为(r1, c1),右下角坐标标记为(r2, c2),将每一层的四个边(最里层可能不是四个边)依次如图输出，这一层输出完毕之后进入下次层，代码如下：
-</code></pre>
-</div>
+<p>意思就是说给定一个m x n的整数矩阵，从左上角开始顺时针螺旋存入到一个一维数组中并输出。这道题的大致思路就是将给定的矩阵从外向里划分层次，第一层为最外层，第二层为次外层，依此类推直到最里层。</p>
+
+<p><img src="https://leetcode.com/problems/spiral-matrix/Figures/54_spiralmatrix.png" alt="spiral_matrix" /></p>
+
+<p>如图，首先将最外层的左上角的坐标标记为(r1, c1),右下角坐标标记为(r2, c2),将每一层的四个边(最里层可能不是四个边)依次如图输出，这一层输出完毕之后进入下次层。这里需要注意不要将每一层角上的数字重复输出。代码如下：</p>
 
 <figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
@@ -111,25 +122,25 @@ Output: [1,2,3,4,8,12,11,10,9,5,6,7]</p>
         <span class="k">if</span><span class="p">(</span><span class="n">matrix</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
             <span class="k">return</span> <span class="p">{};</span>
         <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
-		<span class="c1">// 初始化坐标
+        <span class="c1">// 初始化坐标
 </span>        <span class="kt">int</span> <span class="n">r1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
         <span class="kt">int</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-		<span class="c1">// 由外向里输出直到最里层
+        <span class="c1">// 由外向里输出直到最里层
 </span>        <span class="k">while</span><span class="p">(</span><span class="n">r1</span> <span class="o">&lt;=</span> <span class="n">r2</span> <span class="o">&amp;&amp;</span> <span class="n">c1</span> <span class="o">&lt;=</span> <span class="n">c2</span><span class="p">){</span>
-			<span class="c1">// 输出顶部
+            <span class="c1">// 输出顶部
 </span>            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c1</span><span class="p">;</span> <span class="n">c</span> <span class="o">&lt;=</span> <span class="n">c2</span><span class="p">;</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span>
                 <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">r1</span><span class="p">][</span><span class="n">c</span><span class="p">]);</span>
-			<span class="c1">// 输出右面
+            <span class="c1">// 输出右面
 </span>            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">r</span> <span class="o">&lt;=</span> <span class="n">r2</span><span class="p">;</span> <span class="n">r</span><span class="o">++</span><span class="p">)</span>
                 <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c2</span><span class="p">]);</span>
-			<span class="c1">// 如果这一层存在底部和左面则输出
+            <span class="c1">// 如果这一层存在底部和左面则输出
 </span>            <span class="k">if</span><span class="p">(</span><span class="n">r1</span> <span class="o">&lt;</span> <span class="n">r2</span> <span class="o">&amp;&amp;</span> <span class="n">c1</span> <span class="o">&lt;</span> <span class="n">c2</span><span class="p">){</span>
                 <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">c2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">c</span> <span class="o">&gt;=</span> <span class="n">c1</span><span class="p">;</span> <span class="n">c</span><span class="o">--</span><span class="p">)</span>
                     <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">r2</span><span class="p">][</span><span class="n">c</span><span class="p">]);</span>
                 <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">r2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">r</span> <span class="o">&gt;=</span> <span class="n">r1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="n">r</span><span class="o">--</span><span class="p">)</span>
                     <span class="n">res</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">r</span><span class="p">][</span><span class="n">c1</span><span class="p">]);</span>
             <span class="p">}</span>
-			<span class="c1">// 进入下一层
+            <span class="c1">// 进入下一层
 </span>            <span class="n">r1</span><span class="o">++</span><span class="p">;</span><span class="n">c1</span><span class="o">++</span><span class="p">;</span>
             <span class="n">r2</span><span class="o">--</span><span class="p">;</span><span class="n">c2</span><span class="o">--</span><span class="p">;</span>
         <span class="p">}</span>
